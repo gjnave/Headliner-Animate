@@ -1,4 +1,12 @@
+![Floyd Headliner Animate — Get Going Fast](assets/ggf-brain-logo.png)
+
 # Floyd Headliner Animate
+
+## A Get Going Fast Application
+
+### [Explore Get Going Fast tools](https://getgoingfast.pro/tools/)
+
+An individual Get Going Fast tool page for Animate is not published yet. This repository is the source and manual-install route; it does not contain the member quick installer or model weights.
 
 Settings includes **Release models / free GPU memory** and **Stop server**.
 Release keeps the app and phone connection open; Animate already unloads each
@@ -59,25 +67,36 @@ Exact revisions, sizes and SHA-256 hashes are in `model_manifest.json`. The imag
 
 ## Manual source setup
 
-Install Git for Windows and Python 3.11 (64-bit). Open **Command Prompt** in the folder where you want the app, then run:
+Use Windows 64-bit and a current NVIDIA driver. Install [Git for Windows](https://git-scm.com/download/win) and [uv](https://docs.astral.sh/uv/getting-started/installation/). Open **Command Prompt** in a writable folder:
 
-```bat
-git clone https://codeberg.org/Cognibuild/Headliner-Animate.git
-cd Headliner-Animate
-py -3.11 -m venv .venv
-.venv\Scripts\python.exe -m pip install --upgrade pip
-.venv\Scripts\python.exe -m pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cu130
-.venv\Scripts\python.exe -m pip install -r requirements.txt
-```
+1. Clone the source and create its private Python 3.11 environment:
+
+   ```bat
+   git clone https://codeberg.org/Cognibuild/Headliner-Animate.git
+   cd Headliner-Animate
+   uv venv --managed-python --python 3.11 .venv
+   ```
+
+2. Install CUDA PyTorch and dependencies:
+
+   ```bat
+   uv pip install --python .venv\Scripts\python.exe torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cu130
+   uv pip install --python .venv\Scripts\python.exe -r requirements.txt
+   ```
 
 If Codeberg is unavailable, use `git clone https://github.com/gjnave/Headliner-Animate.git` instead; the remaining commands are identical.
 
-Read `RELEASE-NOTICE.md` and the model terms before downloading models. If you are eligible to use them, download once and start:
+3. Read `RELEASE-NOTICE.md` and the model terms. If you are eligible to use them, download and verify the pinned model files:
 
-```bat
-.venv\Scripts\python.exe setup_models.py
-.venv\Scripts\python.exe app.py
-```
+   ```bat
+   .venv\Scripts\python.exe setup_models.py
+   ```
+
+4. Start the app:
+
+   ```bat
+   .venv\Scripts\python.exe app.py
+   ```
 
 On subsequent starts, only run `.venv\Scripts\python.exe app.py` from the app folder. No ComfyUI installation is needed.
 
